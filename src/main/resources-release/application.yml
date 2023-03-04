@@ -7,3 +7,6 @@ spring:
       minimum-idle: 1
       maximum-pool-size: 4
   jpa:    database: postgresql
+    
+api:
+  url: https://httpbin.org/get

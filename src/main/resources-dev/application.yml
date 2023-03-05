@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://111.111.111.111:555/postgres
-    username: postgres_dev
-    password: postgres_dev
+    url: jdbc:postgresql://192.168.0.8:15432/postgres
+    username: postgres
+    password: postgres1234!@#$
     hikari:      connection-timeout: 3000
       minimum-idle: 1
       maximum-pool-size: 4

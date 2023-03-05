@@ -15,10 +15,16 @@ import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RestUtil {
 	
+	private static Logger LOGGER = LoggerFactory.getLogger(RestUtil.class);
+	
 	public static String getHttpRestApi(String apiUrl, Map<String, Object> params) throws MalformedURLException, IOException, Exception {
+		LOGGER.debug("apiUrl: " + apiUrl);
+		
 		if(StringUtils.isEmpty(apiUrl)) {
 			throw new Exception("WebUtil getHttpRestApi: apiUrl is empty or null.");
 		}
@@ -31,6 +37,8 @@ public class RestUtil {
 		while(paramItr.hasNext()) {	// parameter 추가
 			String paramKey = paramItr.next();
 			String paramValue = params.get(paramKey).toString();
+			
+			LOGGER.debug(paramKey + ": "+ paramValue);
 			
 			sb.append(paramKey).append("=").append(paramValue).append("&");
 		}
@@ -85,6 +93,8 @@ public class RestUtil {
 	}
 	
 	public static String getHttpsRestApi(String apiUrl, Map<String, Object> params) throws MalformedURLException, IOException, Exception {
+		LOGGER.debug("apiUrl: " + apiUrl);
+		
 		if(StringUtils.isEmpty(apiUrl)) {
 			throw new Exception("WebUtil getHttpsRestApi: apiUrl is empty or null.");
 		}
@@ -97,6 +107,8 @@ public class RestUtil {
 		while(paramItr.hasNext()) {	// parameter 추가
 			String paramKey = paramItr.next();
 			String paramValue = params.get(paramKey).toString();
+			
+			LOGGER.debug(paramKey + ": "+ paramValue);
 			
 			sb.append(paramKey).append("=").append(paramValue).append("&");
 		}
@@ -151,6 +163,8 @@ public class RestUtil {
 	}
 	
 	public static String postHttpRestApi(String apiUrl, Map<String, Object> params) throws MalformedURLException, IOException, Exception {
+		LOGGER.debug("apiUrl: " + apiUrl);
+		
 		if(StringUtils.isEmpty(apiUrl)) {
 			throw new Exception("WebUtil postHttpRestApi: apiUrl is empty or null.");
 		}
@@ -180,6 +194,8 @@ public class RestUtil {
 		
 		JSONObject jsonObject = new JSONObject(params);	//parameter body 작성
 		paramStr = jsonObject.toString();
+
+		LOGGER.debug("paramStr: "+ paramStr);
 		
 		OutputStream os = conn.getOutputStream();
 		os.write(paramStr.getBytes("UTF-8"));
@@ -214,6 +230,8 @@ public class RestUtil {
 	}
 	
 	public static String postHttpsRestApi(String apiUrl, Map<String, Object> params) throws MalformedURLException, IOException, Exception {
+		LOGGER.debug("apiUrl: " + apiUrl);
+		
 		if(StringUtils.isEmpty(apiUrl)) {
 			throw new Exception("WebUtil postHttpsRestApi: apiUrl is empty or null.");
 		}
@@ -244,6 +262,8 @@ public class RestUtil {
 		
 		JSONObject jsonObject = new JSONObject(params);	//parameter body 작성
 		paramStr = jsonObject.toString();
+		
+		LOGGER.debug("paramStr: "+ paramStr);
 		
 		OutputStream os = conn.getOutputStream();
 		os.write(paramStr.getBytes("UTF-8"));

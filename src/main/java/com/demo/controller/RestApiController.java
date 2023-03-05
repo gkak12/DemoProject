@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.util.RestUtil;
@@ -18,7 +19,7 @@ public class RestApiController {
 	private String restGetUrl;
 
 	@GetMapping(value="/getRestApi.json")
-	public Map<String, Object> testRestApi(Map<String, Object> params){
+	public Map<String, Object> testRestApi(@RequestParam Map<String, Object> params){
 		Map<String, Object> res = new HashMap<String, Object>();
 		
 		try {

@@ -9,4 +9,7 @@ spring:
   jpa:    database: postgresql
     
 api:
-  url: https://httpbin.org/get
+  get:
+    url: https://httpbin.org/get
+  post:
+    url: https://httpbin.org/post

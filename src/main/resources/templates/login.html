@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>login.html</title>
+</head>
+<body>
+	<form id="loginForm" name="form" action="/loginProcess.do" method="post" autocomplete="off" >
+		<dl>
+			<dt>아이디</dt>
+			<dd>
+				<input type="text" name="userId" id="userId" class="textbox id it" autofocus="autofocus" maxlength="50" title="아이디를 입력해주세요" placeholder="아이디를 입력해주세요"/>
+			</dd>
+			<dt>비밀번호</dt>
+			<dd>
+				<input type="password" id="userPwd" name="userPwd" class="textbox pw it" maxlength="50" title="비밀번호를 입력해주세요" placeholder="비밀번호를 입력해주세요"/>
+			</dd>
+		</dl>
+		<input id="loginBtn" type="submit" class="btn" value="로그인" />
+	</form>
+</body>
+</html>

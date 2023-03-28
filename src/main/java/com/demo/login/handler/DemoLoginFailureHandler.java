@@ -14,8 +14,8 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Component;
 
 @Component
-public class LoginFailureHandler implements AuthenticationFailureHandler{
-	private static final Logger LOGGER = LoggerFactory.getLogger(LoginFailureHandler.class);
+public class DemoLoginFailureHandler implements AuthenticationFailureHandler{
+	private static final Logger LOGGER = LoggerFactory.getLogger(DemoLoginFailureHandler.class);
 	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,

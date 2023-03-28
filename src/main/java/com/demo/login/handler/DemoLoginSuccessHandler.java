@@ -15,8 +15,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 @Component
-public class LoginSuccessHandler implements AuthenticationSuccessHandler{
-	private static final Logger LOGGER = LoggerFactory.getLogger(LoginSuccessHandler.class);
+public class DemoLoginSuccessHandler implements AuthenticationSuccessHandler{
+	private static final Logger LOGGER = LoggerFactory.getLogger(DemoLoginSuccessHandler.class);
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,

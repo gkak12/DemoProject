@@ -13,8 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
-import com.demo.login.handler.LoginAuthenticationHandler;
+import com.demo.login.handler.DemoLoginAuthenticationHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -25,6 +26,9 @@ public class SecurityConfig {
 	
 	@Autowired
 	private AuthenticationFailureHandler failureHandler;
+	
+	@Autowired
+	private LogoutSuccessHandler logoutSuccessHandler;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -38,21 +42,23 @@ public class SecurityConfig {
 
 	@Bean
 	public AuthenticationManager authenticationManager() {
-		return new LoginAuthenticationHandler();
+		return new DemoLoginAuthenticationHandler();
 	}
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable();
+
+		http.sessionManagement()
+		.sessionFixation().changeSessionId()
+		.maximumSessions(1)
+		.expiredUrl("/login.do")
+		.sessionRegistry(sessionRegistry());
 		
 		http.authorizeRequests()
-		.antMatchers("/login.do").permitAll();
-
-//		http.sessionManagement()
-//			.sessionFixation().changeSessionId()
-//			.maximumSessions(1)
-//			.expiredUrl("/login.do")
-//			.sessionRegistry(sessionRegistry());
+		.antMatchers("/login.do").permitAll()
+		.antMatchers("/", "/main.do").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+		.anyRequest().authenticated();
 		
 		http.formLogin()
 		.usernameParameter("userId")
@@ -63,10 +69,11 @@ public class SecurityConfig {
 		.failureHandler(failureHandler)
 		.permitAll();
 		
-//		http.logout()
-//		.logoutUrl("/logout.do")
-//		.invalidateHttpSession(true)
-//		.permitAll();
+		http.logout()
+		.logoutUrl("/logout.do")
+		.logoutSuccessHandler(logoutSuccessHandler)
+		.invalidateHttpSession(true)
+		.permitAll();
 		
 		return http.build();
 	}

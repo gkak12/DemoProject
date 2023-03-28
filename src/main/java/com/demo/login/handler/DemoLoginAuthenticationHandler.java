@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,9 +24,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.demo.login.repository.LoginRepository;
 import com.demo.login.vo.LoginVo;
 
-public class LoginAuthenticationHandler implements UserDetailsService, AuthenticationManager {
+public class DemoLoginAuthenticationHandler implements UserDetailsService, AuthenticationManager {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(LoginAuthenticationHandler.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DemoLoginAuthenticationHandler.class);
 
 	@Resource(name = "passwordEncoder")
 	private BCryptPasswordEncoder encoder;
@@ -44,12 +45,12 @@ public class LoginAuthenticationHandler implements UserDetailsService, Authentic
 			throw new BadCredentialsException("Error log: pwd is not matched.");
 		}
 		
-		return new UsernamePasswordAuthenticationToken(user, userPwd);
+		return new UsernamePasswordAuthenticationToken(user, userPwd, user.getAuthorities());
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		Optional<LoginVo> loginOptional = loginRepository.findByUserId(userId);
+		Optional<LoginVo> loginOptional = loginRepository.findById(userId);
 		
 		if(!loginOptional.isPresent()) {
 			String errorMsg = "User is not found OR Database connection is falied.";
@@ -60,8 +61,8 @@ public class LoginAuthenticationHandler implements UserDetailsService, Authentic
 
 		LoginVo loginVo = loginOptional.get();
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		
-		User user = new User(loginVo.getUserId(), loginVo.getUserPwd(), authorities);
+		authorities.add( new SimpleGrantedAuthority( loginVo.getAuth().toString() ) );
+		User user = new User(loginVo.getId(), loginVo.getPwd(), authorities);
 		
 		return user;
 	}

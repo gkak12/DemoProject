@@ -10,5 +10,5 @@ import com.demo.login.vo.LoginVo;
 @Repository("loginRepository")
 public interface LoginRepository extends JpaRepository<LoginVo, String>{
 
-	public Optional<LoginVo> findByUserId(String id);
+	public Optional<LoginVo> findById(String id);
 }

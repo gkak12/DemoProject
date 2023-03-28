@@ -5,17 +5,25 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
-    hikari:
-      connection-timeout: 3000
+    hikari:      connection-timeout: 3000
       minimum-idle: 1
       maximum-pool-size: 4
-  jpa:
-    database: postgresql
+  jpa:    database: postgresql
 
 security:
-    logout:
-      url: /logout.do
+  login:
+    url: /login.do
+  loginProc:
+    url: /loginProc.do
+  logout:
+    url: /logout.do
     
+page:
+  root:
+    url: /
+  main:
+    url: /main.do
+
 api:
   get:
     url: https://httpbin.org/get

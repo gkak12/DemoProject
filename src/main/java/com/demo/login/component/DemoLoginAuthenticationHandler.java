@@ -1,4 +1,4 @@
-package com.demo.login.handler;
+package com.demo.login.component;
 
 import java.util.ArrayList;
 import java.util.List;

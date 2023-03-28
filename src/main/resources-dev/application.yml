@@ -11,9 +11,19 @@ spring:
   jpa:    database: postgresql
 
 security:
-    logout:
-      url: /logout.do
+  login:
+    url: /login.do
+  loginProc:
+    url: /loginProc.do
+  logout:
+    url: /logout.do
     
+page:
+  root:
+    url: /
+  main:
+    url: /main.do
+
 api:
   get:
     url: https://httpbin.org/get

@@ -1,4 +1,4 @@
-package com.demo.login.handler;
+package com.demo.login.component;
 
 import java.io.IOException;
 import java.io.PrintWriter;

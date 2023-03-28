@@ -1,6 +1,7 @@
 .settings
 src/test
 target/
+logs/
 .classpath
 .factorypath
 .project

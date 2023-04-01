@@ -22,13 +22,17 @@ public class LoginVo {
 	@Column(name="pwd")
 	private String pwd;
 	
+	@Column(name="name")
+	private String name;
+	
 	@Column(name="auth")
 	private String auth;
 	
 	@Builder
-	public LoginVo(String id, String pwd, String auth) {
+	public LoginVo(String id, String pwd, String name, String auth) {
 		this.id = id;
 		this.pwd = pwd;
+		this.name = name;
 		this.auth = auth;
 	}
 }

@@ -15,8 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+import com.demo.login.component.DemoAuthenticationFilter;
 import com.demo.login.component.DemoLoginAuthenticationHandler;
 import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
 
@@ -47,7 +49,7 @@ public class SecurityConfig {
 	
 	@Autowired
 	private LogoutSuccessHandler logoutSuccessHandler;
-
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -57,7 +59,7 @@ public class SecurityConfig {
 	public SessionRegistry sessionRegistry() {
 		return new SessionRegistryImpl();
 	}
-
+	
 	@Bean
 	public AuthenticationManager authenticationManager() {
 		return new DemoLoginAuthenticationHandler();
@@ -71,6 +73,16 @@ public class SecurityConfig {
 		filterRegistration.addUrlPatterns("/*");
 		
 		return filterRegistration;
+	}
+	
+	@Bean
+	public DemoAuthenticationFilter demoAuthenticationFilter() {
+		DemoAuthenticationFilter filter = new DemoAuthenticationFilter("/loginProc.do");
+		filter.setAuthenticationManager(authenticationManager());
+        filter.setAuthenticationSuccessHandler(successHandler);
+        filter.setAuthenticationFailureHandler(failureHandler);
+        
+        return filter;
 	}
 	
 	@Bean
@@ -92,10 +104,9 @@ public class SecurityConfig {
 		.usernameParameter("userId")
 		.passwordParameter("userPwd")
 		.loginPage(loginUrl)
-		.loginProcessingUrl(loginProcUrl)
-		.successHandler(successHandler)
-		.failureHandler(failureHandler)
-		.permitAll();
+		.permitAll()
+		.and()
+		.addFilterBefore(demoAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 		
 		http.logout()
 		.logoutUrl(logoutUrl)

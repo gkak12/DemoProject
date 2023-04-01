@@ -42,7 +42,7 @@ public class DemoLoginAuthenticationHandler implements UserDetailsService, Authe
 		User user = (User) this.loadUserByUsername(userId);
 		
 		if(!encoder.matches(userPwd, user.getPassword())) {
-			throw new BadCredentialsException("Error log: pwd is not matched.");
+			throw new BadCredentialsException("password is not matched.");
 		}
 		
 		return new UsernamePasswordAuthenticationToken(user, userPwd, user.getAuthorities());

@@ -22,8 +22,10 @@ public class DemoLoginFailureHandler implements AuthenticationFailureHandler{
 			AuthenticationException exception) throws IOException, ServletException {
 		LOGGER.debug(exception.getMessage());
 		
-		PrintWriter pw = response.getWriter();
-		pw.println("<script>alert('로그인 실패했습니다.')</script>");
-		pw.flush();
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('로그인 실패했습니다.');	location.href='/login.do';</script>");
+		out.flush();
 	}
 }

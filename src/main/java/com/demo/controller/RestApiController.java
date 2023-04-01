@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,8 @@ import com.demo.util.RestUtil;
 @RestController
 public class RestApiController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(RestApiController.class);
+	
 	@Value("${api.get.url}")
 	private String apiGetUrl;
 	
@@ -33,13 +37,13 @@ public class RestApiController {
 			res.put("Data", RestUtil.getHttpsRestApi(apiGetUrl, params));
 			res.put("Msg", "SUCCESS");
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 			res.put("Msg", "FAIL");
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 			res.put("Msg", "FAIL");
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 			res.put("Msg", "FAIL");
 		}
 		
@@ -54,13 +58,13 @@ public class RestApiController {
 			res.put("Data", RestUtil.postHttpsRestApi(apiPostUrl, params));
 			res.put("Msg", "SUCCESS");
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 			res.put("Msg", "FAIL");
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 			res.put("Msg", "FAIL");
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 			res.put("Msg", "FAIL");
 		}
 		

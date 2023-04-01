@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,8 @@ import com.demo.vo.DemoRelation;
 @RestController
 public class DemoController {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(DemoController.class);
+	
 	@Resource
 	private DemoService demoService;
 	
@@ -28,7 +32,7 @@ public class DemoController {
 			res.put("List", demoService.findAll());
 			res.put("Msg", "SUCCESS");
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 			res.put("Msg", "FAIL");
 		}
 		
@@ -43,7 +47,7 @@ public class DemoController {
 			res.put("List", demoService.findById(id));
 			res.put("Msg", "SUCCESS");
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 			res.put("Msg", "FAIL");
 		}
 		
@@ -58,7 +62,7 @@ public class DemoController {
 			demoService.save(d);
 			res.put("Msg", "SUCCESS");
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 			res.put("Msg", "FAIL");
 		}
 		
@@ -73,7 +77,7 @@ public class DemoController {
 			demoService.deleteById(id);
 			res.put("Msg", "SUCCESS");
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.debug(e.toString());
 			res.put("Msg", "FAIL");
 		}
 		

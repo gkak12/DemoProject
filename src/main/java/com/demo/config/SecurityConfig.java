@@ -2,6 +2,7 @@ package com.demo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +18,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import com.demo.login.component.DemoLoginAuthenticationHandler;
+import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -62,9 +64,19 @@ public class SecurityConfig {
 	}
 	
 	@Bean
+	public FilterRegistrationBean<XssEscapeServletFilter> filterRegistrationBean() {
+		FilterRegistrationBean<XssEscapeServletFilter> filterRegistration = new FilterRegistrationBean<>();
+		filterRegistration.setFilter(new XssEscapeServletFilter());
+		filterRegistration.setOrder(1);
+		filterRegistration.addUrlPatterns("/*");
+		
+		return filterRegistration;
+	}
+	
+	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-
+		
 		http.sessionManagement()
 		.sessionFixation().changeSessionId()
 		.maximumSessions(1)
@@ -93,5 +105,4 @@ public class SecurityConfig {
 		
 		return http.build();
 	}
-	
 }

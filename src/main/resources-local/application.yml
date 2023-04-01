@@ -17,6 +17,10 @@ security:
     url: /loginProc.do
   logout:
     url: /logout.do
+
+server:
+  error:
+    path: /error
     
 page:
   root:

@@ -10,7 +10,7 @@ spring:
       maximum-pool-size: 4
   jpa:    database: postgresql
   thymeleaf:
-    cache: false
+    cache: true
 
 security:
   login:

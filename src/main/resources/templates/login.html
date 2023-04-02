@@ -3,6 +3,17 @@
 	<head>
 		<meta charset="utf-8">
 		<title>login.html</title>
+		
+		<link rel="stylesheet" type="text/css" href="/lib/jquery/jquery-ui.min.css" />
+
+		<script type="text/javascript" src="/lib/jquery/jquery-3.5.1.min.js"></script>
+		<script type="text/javascript" src="/lib/jquery/jquery-ui.min.js"></script>
+		
+		<script type="text/javascript" src="/login/rsa.js"></script>
+		<script type="text/javascript" src="/login/jsbn.js"></script>
+		<script type="text/javascript" src="/login/prng4.js"></script>
+		<script type="text/javascript" src="/login/rng.js"></script>
+		<script type="text/javascript" src="/login/login.js"></script>
 	</head>
 	<body>
 		<form id="loginForm" name="form" action="/loginProc.do" method="post" autocomplete="off" >
@@ -14,6 +25,7 @@
 				<dt>비밀번호</dt>
 				<dd>
 					<input type="password" id="userPwd" name="userPwd" class="textbox pw it" maxlength="50" title="비밀번호를 입력해주세요" placeholder="비밀번호를 입력해주세요"/>
+					<input type="hidden" id="enPwd" name="enPwd"/>
 				</dd>
 			</dl>
 			<input id="loginBtn" type="submit" class="btn" value="로그인" />

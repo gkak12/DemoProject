@@ -27,24 +27,34 @@ public class DemoAuthenticationFilter extends AbstractAuthenticationProcessingFi
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 		String username = request.getParameter("userId");
-		String password = request.getParameter("userPwd");
-		LOGGER.debug("============== " + username + ", " + password + " ==============");
+		LOGGER.debug(username);
 
-//		try {
-//			realPass = decodePassword(request);
-//		} catch (NoSuchAlgorithmException e) {
-//			LOGGER.debug(e.toString());
-//		}
+		String realPass = null;
 		
-		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(username, password));
+		try {
+			realPass = decodePassword(request);
+		} catch (NoSuchAlgorithmException e) {
+			LOGGER.debug(e.toString());
+			throw new AuthenticationException(e.toString());
+		}
+		
+		if(realPass == null || "".equals(realPass)) {
+			String errMsg = "decoding password is failed.";
+			
+			LOGGER.debug(errMsg);
+			throw new AuthenticationException(errMsg);
+		}
+		
+		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(username, realPass));
 	}
 	
 	private String decodePassword(HttpServletRequest request) throws NoSuchAlgorithmException {
-		String password = request.getParameter("userPwd");	// form에서 전달하는 비밀번호 파라미터 명
+		String enPwd = request.getParameter("enPwd");	// form에서 전달하는 encode 비밀번호 파라미터 명
+		LOGGER.debug(enPwd);
 		
 		HttpSession session = request.getSession();
 		PrivateKey privateKey = (PrivateKey) session.getAttribute("rsaKey");
-		String realPass = RsaUtil.decryptRsa(privateKey, password);
+		String realPass = RsaUtil.decryptRsa(privateKey, enPwd);
 		session.removeAttribute("rsaKey");
 	
 		return realPass;

@@ -97,12 +97,13 @@ public class SecurityConfig {
 		
 		http.authorizeRequests()
 		.antMatchers(loginUrl).permitAll()
+		.antMatchers("/lib/jquery/**", "/login/**").permitAll()
 		.antMatchers(rootPageUrl, mainPageUrl).access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 		.anyRequest().authenticated();
 		
 		http.formLogin()
 		.usernameParameter("userId")
-		.passwordParameter("userPwd")
+		.passwordParameter("enPwd")
 		.loginPage(loginUrl)
 		.permitAll()
 		.and()

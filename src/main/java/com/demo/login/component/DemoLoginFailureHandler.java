@@ -20,7 +20,7 @@ public class DemoLoginFailureHandler implements AuthenticationFailureHandler{
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
-		LOGGER.debug(exception.getMessage());
+		LOGGER.debug(exception.toString());
 		
 		response.setContentType("text/html; charset=UTF-8");
 		

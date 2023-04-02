@@ -98,6 +98,7 @@ public class SecurityConfig {
 		http.authorizeRequests()
 		.antMatchers(loginUrl).permitAll()
 		.antMatchers("/lib/jquery/**", "/login/**").permitAll()
+		.antMatchers("/webSocket**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 		.antMatchers(rootPageUrl, mainPageUrl).access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 		.anyRequest().authenticated();
 		

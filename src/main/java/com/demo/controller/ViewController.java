@@ -15,4 +15,9 @@ public class ViewController {
 	public String getLoginPage() {
 		return "login";
 	}
+	
+	@GetMapping(value="/webSocket.do")
+	public String getWebSocketPage() {
+		return "webSocket";
+	}
 }

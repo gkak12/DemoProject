@@ -21,6 +21,7 @@ security:
     url: /logout.do
 
 server:
+  port: 8080
   error:
     path: /error
 

@@ -9,6 +9,8 @@ spring:
       minimum-idle: 1
       maximum-pool-size: 4
   jpa:    database: postgresql
+  thymeleaf:
+    cache: false
 
 security:
   login:

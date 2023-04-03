@@ -49,12 +49,12 @@ public class DemoAuthenticationFilter extends AbstractAuthenticationProcessingFi
 	}
 	
 	private String decodePassword(HttpServletRequest request) throws NoSuchAlgorithmException {
-		String enPwd = request.getParameter("enPwd");	// form에서 전달하는 encode 비밀번호 파라미터 명
-		LOGGER.debug(enPwd);
+		String enUserPwd = request.getParameter("enUserPwd");	// form에서 전달하는 encode 비밀번호 파라미터 명
+		LOGGER.debug(enUserPwd);
 		
 		HttpSession session = request.getSession();
 		PrivateKey privateKey = (PrivateKey) session.getAttribute("rsaKey");
-		String realPass = RsaUtil.decryptRsa(privateKey, enPwd);
+		String realPass = RsaUtil.decryptRsa(privateKey, enUserPwd);
 		session.removeAttribute("rsaKey");
 	
 		return realPass;

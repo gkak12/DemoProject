@@ -104,7 +104,7 @@ public class SecurityConfig {
 		
 		http.formLogin()
 		.usernameParameter("userId")
-		.passwordParameter("enPwd")
+		.passwordParameter("enUserPwd")
 		.loginPage(loginUrl)
 		.permitAll()
 		.and()

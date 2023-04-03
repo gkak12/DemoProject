@@ -24,7 +24,7 @@ $(document).ready(function(e){
 				  var rsaKey = new RSAKey();
 				  
 				  rsaKey.setPublic(data.pModules, data.pExponent);
-				  $("#enPwd").val(rsaKey.encrypt(userPwd));
+				  $("#enUserPwd").val(rsaKey.encrypt(userPwd));
 				  
 				  $("#userPwd").val("");
 				  userPwd = null;

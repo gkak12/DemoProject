@@ -41,6 +41,10 @@ public class DemoController {
 	
 	@GetMapping(value="/selectById.json")
 	public Map<String, Object> selectById(@RequestParam(value="id", required=true) String id){
+		if(id.isEmpty()) {
+			throw new NullPointerException("parameter id is empty.");
+		}
+		
 		Map<String, Object> res = new HashMap<String, Object>();
 		
 		try {
@@ -71,6 +75,10 @@ public class DemoController {
 	
 	@DeleteMapping(value="/deleteById.json")
 	public Map<String, Object> deleteById(@RequestParam(value="id", required=true) String id){
+		if(id.isEmpty()) {
+			throw new NullPointerException("parameter id is empty.");
+		}
+		
 		Map<String, Object> res = new HashMap<String, Object>();
 		
 		try {

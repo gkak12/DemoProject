@@ -1,4 +1,4 @@
-package com.demo;
+package com.demo.controller;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -24,7 +24,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.demo.config.SecurityConfig;
-import com.demo.controller.DemoController;
 import com.demo.service.DemoService;
 
 @ExtendWith(SpringExtension.class)
@@ -66,7 +65,6 @@ class DemoControllerTest {
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
-//			e.printStackTrace();
 		}
 	}
 
@@ -88,7 +86,6 @@ class DemoControllerTest {
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
-//			e.printStackTrace();
 		}
 	}
 	
@@ -112,7 +109,6 @@ class DemoControllerTest {
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
-//			e.printStackTrace();
 		}
 	}
 	
@@ -134,7 +130,6 @@ class DemoControllerTest {
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
-//			e.printStackTrace();
 		}
 	}
 }

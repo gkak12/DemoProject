@@ -1,4 +1,4 @@
-package com.demo;
+package com.demo.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,7 +24,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.demo.config.SecurityConfig;
-import com.demo.controller.DemoController;
 import com.demo.service.DemoService;
 
 @ExtendWith(SpringExtension.class)
@@ -37,10 +36,10 @@ import com.demo.service.DemoService;
 )
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DisplayName("DemoController 테스트 클래스 ")
-class DemoControllerError {
+@DisplayName("DemoController 에러 테스트 클래스 ")
+class DemoControllerErrorTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(DemoControllerError.class);
+	private static final Logger logger = LoggerFactory.getLogger(DemoControllerErrorTest.class);
 	
 	@Autowired
 	private MockMvc mockMvc;

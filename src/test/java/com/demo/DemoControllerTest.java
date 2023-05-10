@@ -66,7 +66,7 @@ class DemoControllerTest {
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 
@@ -88,7 +88,7 @@ class DemoControllerTest {
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 	
@@ -112,7 +112,7 @@ class DemoControllerTest {
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 	
@@ -134,7 +134,7 @@ class DemoControllerTest {
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 }

@@ -28,11 +28,15 @@ public class LoginVo {
 	@Column(name="auth")
 	private String auth;
 	
+	@Column(name="email")
+	private String email;
+	
 	@Builder
-	public LoginVo(String id, String pwd, String name, String auth) {
+	public LoginVo(String id, String pwd, String name, String auth, String email) {
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
 		this.auth = auth;
+		this.email = email;
 	}
 }

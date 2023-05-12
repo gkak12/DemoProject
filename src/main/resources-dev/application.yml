@@ -36,3 +36,11 @@ api:
     url: https://httpbin.org/get
   post:
     url: https://httpbin.org/post
+        
+mail:
+  sender:
+    id: test@mail.com
+    pwd: qwe123!@#
+    host: smtp.naver.com
+    port: 465
+    auth: true

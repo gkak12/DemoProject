@@ -35,8 +35,8 @@ class LoginServiceImplTest {
 	private LoginRepository loginRepository;
 	
 	@Test
-	public void 비밀번호_초기화_테스트() {
-		logger.debug("비밀번호_초기화_테스트");
+	public void 비밀번호_초기화_이메일_테스트() {
+		logger.debug("비밀번호_초기화_이메일_테스트");
 		
         try {
         	String senderId = "aaa@naver.com";
@@ -48,6 +48,8 @@ class LoginServiceImplTest {
     		prop.put("mail.smtp.host", "smtp.naver.com");
             prop.put("mail.smtp.port", 465);
             prop.put("mail.smtp.auth", "true");
+            prop.put("mail.smtp.ssl.enable", "true");
+            prop.put("mail.smtp.ssl.trust", "smtp.naver.com");
             
             Session session = Session.getDefaultInstance(prop, new Authenticator() {
     			@Override
@@ -60,7 +62,7 @@ class LoginServiceImplTest {
 			message.setFrom(new InternetAddress(senderId));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(recvId));
 			message.setSubject("이메일 테스트", "UTF-8");
-			message.setText(tmpPwd);
+			message.setText(tmpPwd, "UTF=8");
 			
 			Transport.send(message);
 		} catch (AddressException e) {

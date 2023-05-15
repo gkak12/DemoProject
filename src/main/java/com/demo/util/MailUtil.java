@@ -59,12 +59,13 @@ public class MailUtil {
 				return new PasswordAuthentication(senderId, senderPwd);
 			}
 		});
-		
+
+        String encoding = "UTF-8";
         MimeMessage message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(senderId));
 		message.addRecipient(Message.RecipientType.TO, new InternetAddress(recvEmail));
-		message.setSubject(subject, "UTF-8");
-		message.setText(content, "UTF-8");
+		message.setSubject(subject, encoding);
+		message.setText(content, encoding);
 		
 		Transport.send(message);
 	}

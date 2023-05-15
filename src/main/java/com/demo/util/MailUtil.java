@@ -37,6 +37,12 @@ public class MailUtil {
 	@Value("${mail.sender.auth}")
 	private String senderAuth;
 	
+	@Value("${mail.sender.ssl.enable}")
+	private String senderSslEnable;
+	
+	@Value("${mail.sender.ssl.host}")
+	private String senderSslHost;
+	
 	public void sendTextEmail(String recvEmail, String subject, String content) throws AddressException, MessagingException, Exception{
 		LOGGER.debug(recvEmail + ", " + subject + ", " + content);
 		
@@ -44,6 +50,8 @@ public class MailUtil {
 		prop.put("mail.smtp.host", senderHost);
         prop.put("mail.smtp.port", senderPort);
         prop.put("mail.smtp.auth", senderAuth);
+        prop.put("mail.smtp.ssl.enable", senderSslEnable);
+        prop.put("mail.smtp.ssl.trust", senderSslHost);
         
         Session session = Session.getDefaultInstance(prop, new Authenticator() {
 			@Override
@@ -56,7 +64,7 @@ public class MailUtil {
 		message.setFrom(new InternetAddress(senderId));
 		message.addRecipient(Message.RecipientType.TO, new InternetAddress(recvEmail));
 		message.setSubject(subject, "UTF-8");
-		message.setText(content);
+		message.setText(content, "UTF-8");
 		
 		Transport.send(message);
 	}

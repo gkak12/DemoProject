@@ -43,3 +43,6 @@ mail:
     host: smtp.naver.com
     port: 465
     auth: true
+    ssl:
+      enable: true
+      host: smtp.naver.com

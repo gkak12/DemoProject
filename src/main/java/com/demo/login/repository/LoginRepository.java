@@ -11,4 +11,7 @@ import com.demo.login.vo.LoginVo;
 public interface LoginRepository extends JpaRepository<LoginVo, String>{
 
 	public Optional<LoginVo> findById(String id);
+	
+	@SuppressWarnings("unchecked")
+	public LoginVo save(LoginVo loginVo);
 }

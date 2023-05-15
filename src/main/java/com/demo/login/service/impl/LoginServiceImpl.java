@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.demo.login.repository.LoginRepository;
@@ -27,6 +28,9 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Resource(name="loginRepository")
 	private LoginRepository loginRepository;
+	
+	@Resource(name = "passwordEncoder")
+	private BCryptPasswordEncoder encoder;
 
 	@Override
 	public void saveInitPwd(HttpServletRequest request) throws AddressException, MessagingException, Exception {
@@ -37,6 +41,9 @@ public class LoginServiceImpl implements LoginService{
 
 		String tmpSuject = userId.concat(" 비밀번호 초기화");
 		String tmpPwd = UUID.randomUUID().toString();
+		
+		loginVo.get().setPwd(encoder.encode(tmpPwd));
+		loginRepository.save(loginVo.get());
 		
 		mailUtil.sendTextEmail(recvEmail, tmpSuject, tmpPwd);
 		

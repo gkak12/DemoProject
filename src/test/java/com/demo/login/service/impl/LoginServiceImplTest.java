@@ -15,24 +15,13 @@ import javax.mail.internet.MimeMessage;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.demo.login.repository.LoginRepository;
-
-@ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
 @DisplayName("LoginServiceImpl 테스트 클래스 ")
 class LoginServiceImplTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginServiceImplTest.class);
-	
-	@MockBean
-	private LoginRepository loginRepository;
 	
 	@Test
 	public void 비밀번호_초기화_이메일_테스트() {
@@ -58,11 +47,12 @@ class LoginServiceImplTest {
     			}
     		});
     		
+            String encoding = "UTF-8";
             MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(senderId));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(recvId));
-			message.setSubject("이메일 테스트", "UTF-8");
-			message.setText(tmpPwd, "UTF=8");
+			message.setSubject("이메일 테스트", encoding);
+			message.setText(tmpPwd, encoding);
 			
 			Transport.send(message);
 		} catch (AddressException e) {

@@ -61,7 +61,7 @@ class DemoControllerErrorTest {
 						String expClsNm = result.getResolvedException().getClass().getCanonicalName();
 						logger.debug(expClsNm);
 						
-						assertEquals(expClsNm, "org.springframework.web.bind.MissingServletRequestParameterException");
+						assertEquals("org.springframework.web.bind.MissingServletRequestParameterException", expClsNm);
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
@@ -82,7 +82,7 @@ class DemoControllerErrorTest {
 						String expClsNm = result.getResolvedException().getClass().getCanonicalName();
 						logger.debug(expClsNm);
 						
-						assertEquals(expClsNm, "NullPointerException");
+						assertEquals("NullPointerException", expClsNm);
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
@@ -103,7 +103,7 @@ class DemoControllerErrorTest {
 						String expClsNm = result.getResolvedException().getClass().getCanonicalName();
 						logger.debug(expClsNm);
 						
-						assertEquals(expClsNm, "org.springframework.web.bind.MissingServletRequestParameterException");
+						assertEquals("org.springframework.web.bind.MissingServletRequestParameterException", expClsNm);
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());
@@ -124,7 +124,7 @@ class DemoControllerErrorTest {
 						String expClsNm = result.getResolvedException().getClass().getCanonicalName();
 						logger.debug(expClsNm);
 						
-						assertEquals(expClsNm, "java.lang.NullPointerException");
+						assertEquals("java.lang.NullPointerException", expClsNm);
 					});
 		} catch (Exception e) {
 			logger.debug(e.toString());

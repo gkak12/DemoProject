@@ -20,6 +20,11 @@ security:
   logout:
     url: /logout.do
 
+logging:
+  file:
+    path: /home/user/tomcat/logs
+    name: demo
+
 server:
   port: 8080
   error:

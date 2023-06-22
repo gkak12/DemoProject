@@ -19,11 +19,14 @@ security:
   logout:
     url: /logout.do
 
+logging:  file:    path: /home/user/workspace/DemoProject/logs
+    name: demo
+
 server:
   port: 8080
   error:
     path: /error
-    
+
 page:
   root:
     url: /

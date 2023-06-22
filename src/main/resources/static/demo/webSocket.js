@@ -34,7 +34,7 @@ var onClose = function(e){
 	console.log(e);
 	console.log("webSocket is disconnected.");
 	
-	initWebSocket();
+//	initWebSocket();
 };
 
 var onError = function(e){

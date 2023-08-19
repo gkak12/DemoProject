@@ -35,8 +35,8 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		
 		for(WebSocketSession wSession : sessionList) {
 			if(wSession.getId().equals(session.getId())) {
-				LOGGER.debug(session.getId() + " sends " + message.getPayload());
 				session.sendMessage(new TextMessage("reply-" + message.getPayload()));
+				LOGGER.debug(session.getId() + " sends " + message.getPayload());
 				
 				break;
 			}
